@@ -2,17 +2,18 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
+require('dotenv').config();
 const PORT = 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-//connect to cluster
-//console.log('Insert password');
-//var password = prompt("input password");
+//start with npm run lauch
 
-mongoose.connect('mongodb+srv://Basitb:Adebowale2010@collegecourses-ne1ze.mongodb.net/test?retryWrites=true&w=majority',{useNewURLParser:true });
+const server = 'mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASSWORD+'@collegecourses-ne1ze.mongodb.net/'+process.env.DB_NAME+'?retryWrites=true&w=majority';
+//console.log(server);
+mongoose.connect(server, {useNewUrlParser: true});
 console.log(mongoose.version);
 const connection = mongoose.connection;
 
